@@ -562,6 +562,41 @@ When adding a new navbar concept:
 4. State what makes it visually different.
 5. Avoid treating a brand name as a literal instruction to clone that brand.
 
+
+---
+
+## Interactive gallery
+
+The repository now includes a working static gallery:
+
+- `index.html` — interactive catalog shell
+- `styles.css` — responsive premium dark UI
+- `app.js` — 150 catalog entries, filtering, search, scrolling section rail, clickable cards, live preview drawer, keyboard navigation, and random style selection
+
+### Run locally
+
+Serve the folder with any static web server:
+
+```bash
+python3 -m http.server 8080
+```
+
+Then open `http://localhost:8080`.
+
+### Interactions
+
+- **Scroll:** browse all 150 styles.
+- **Click a card:** open the interactive detail panel.
+- **Click preview tabs:** change the simulated active destination.
+- **Simulate active state:** cycles the preview selection.
+- **Collapse / expand:** changes preview density.
+- **Search:** filters titles, families, and descriptions.
+- **Section rail:** jumps to a catalog family.
+- **⌘K / Ctrl+K:** focuses search.
+- **↑ / ↓:** browse filtered styles while the detail panel is open.
+- **Esc:** close the detail panel.
+- **↗:** open a random style.
+
 ---
 
 ## Index
