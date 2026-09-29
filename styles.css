@@ -547,11 +547,27 @@ main{max-width:1180px;margin:0 auto;padding:0 16px}
     inset 0 1px rgba(255,255,255,.035),
     0 5px 18px rgba(0,0,0,.10);
   isolation:isolate;
+  opacity:0;
+  transform:
+    perspective(900px)
+    rotateX(calc(var(--my,0) * -1deg))
+    rotateY(calc(var(--mx,0) * 1deg))
+    translateY(16px);
   transition:
-    transform .42s var(--ease-snap),
+    opacity .5s ease,
+    transform .65s var(--ease-snap),
     border-color .32s ease,
     background .32s ease,
     box-shadow .42s var(--ease-snap);
+}
+.card.is-visible{
+  opacity:1;
+  transform:
+    perspective(900px)
+    rotateX(calc(var(--my,0) * -1deg))
+    rotateY(calc(var(--mx,0) * 1deg))
+    translateY(0);
+  transition-delay:var(--reveal-delay,0ms);
 }
 .card::before{
   content:"";
@@ -574,7 +590,11 @@ main{max-width:1180px;margin:0 auto;padding:0 16px}
   opacity:.35;
 }
 .card:hover{
-  transform:translateY(-5px);
+  transform:
+    perspective(900px)
+    rotateX(calc(var(--my,0) * -1.6deg))
+    rotateY(calc(var(--mx,0) * 1.6deg))
+    translateY(-5px);
   border-color:rgba(255,255,255,.145);
   background:
     linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.02)),
@@ -585,7 +605,14 @@ main{max-width:1180px;margin:0 auto;padding:0 16px}
     0 0 0 1px rgba(255,255,255,.015);
 }
 .card:hover::before{opacity:1;transform:scale(1.04)}
-.card:active{transform:translateY(-1px) scale(.995)}
+.card:active{
+  transform:
+    perspective(900px)
+    rotateX(0deg)
+    rotateY(0deg)
+    translateY(-1px)
+    scale(.995)
+}
 .card-number{
   position:absolute;
   z-index:3;
@@ -653,7 +680,7 @@ main{max-width:1180px;margin:0 auto;padding:0 16px}
   transition:transform .55s var(--ease-snap),border-color .3s ease;
 }
 .card:hover .mini{
-  transform:translateY(-1px);
+  transform:translate3d(calc(var(--mx,0) * 2px),calc(var(--my,0) * 2px),0) translateY(-1px);
   border-color:rgba(255,255,255,.12);
 }
 .mini::before{
@@ -1112,10 +1139,10 @@ main{max-width:1180px;margin:0 auto;padding:0 16px}
 
 /* Fine detail / responsive */
 @media (hover:hover){
-  .card-grid:hover .card:not(:hover){opacity:.72}
-  .card-grid:hover .card:not(:hover) .mini{filter:saturate(.78)}
-  .card-grid:hover .card{transition:transform .42s var(--ease-snap),border-color .32s ease,background .32s ease,box-shadow .42s var(--ease-snap),opacity .35s ease}
+  .card-grid:hover .card:not(:hover){opacity:.68}
+  .card-grid:hover .card:not(:hover) .mini{filter:saturate(.78) brightness(.92)}
 }
+
 @media (max-width:980px){
   .topbar{width:calc(100% - 24px);top:12px}
   .gallery-wrap{grid-template-columns:150px minmax(0,1fr);gap:22px}
