@@ -293,6 +293,42 @@ function renderRail(){
   }));
 }
 
+function bindCardMotion(){
+  const cards = [...gallery.querySelectorAll(".card")];
+  if (window.matchMedia("(hover:hover)").matches) {
+    cards.forEach(card => {
+      card.addEventListener("pointermove", event => {
+        const rect = card.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+        const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+        card.style.setProperty("--mx", x.toFixed(3));
+        card.style.setProperty("--my", y.toFixed(3));
+      });
+      card.addEventListener("pointerleave", () => {
+        card.style.removeProperty("--mx");
+        card.style.removeProperty("--my");
+      });
+    });
+  }
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin:"40px 0px -6% 0px", threshold:.05 });
+    cards.forEach((card, index) => {
+      card.style.setProperty("--reveal-delay", Math.min(index % 4, 3) * 55 + "ms");
+      observer.observe(card);
+    });
+  } else {
+    cards.forEach(card => card.classList.add("is-visible"));
+  }
+}
+
 function renderGallery(){
   if(!filtered.length){
     gallery.innerHTML = '<div class="no-results"><strong>No matching navbar styles</strong>Try another search or reset the filter.</div>';
@@ -323,6 +359,7 @@ function renderGallery(){
       if(e.key==="Enter" || e.key===" ") { e.preventDefault(); openDrawer(Number(card.dataset.index)); }
     });
   });
+  bindCardMotion();
 }
 
 function applyFilters(){
