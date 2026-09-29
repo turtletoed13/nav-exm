@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050506" />
+  <title>NAV-EXM — Navbar Experiment Gallery</title>
+  <meta name="description" content="An interactive gallery of 150 modern navbar design directions." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="NAV-EXM home">
+      <span class="brand-mark">N</span>
+      <span>
+        <strong>NAV-EXM</strong>
+        <small>Navbar Experiment Gallery</small>
+      </span>
+    </a>
+
+    <div class="top-actions">
+      <label class="search" aria-label="Search navbars">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.2 4.2"></path></svg>
+        <input id="searchInput" type="search" autocomplete="off" placeholder="Search styles, Apple, HUD, brutalist..." />
+        <kbd>⌘ K</kbd>
+      </label>
+      <button class="icon-button" id="randomButton" title="Open a random navbar" aria-label="Open a random navbar">↗</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="eyebrow"><span class="pulse"></span> 150 interactive directions</div>
+      <h1>Explore <span>how navigation</span> can feel.</h1>
+      <p>Scroll the catalog, jump between visual families, or click any concept to open a live mini-preview and interaction notes.</p>
+
+      <div class="hero-tools">
+        <div class="filter-pills" id="filterPills"></div>
+        <div class="count" id="resultCount">150 styles</div>
+      </div>
+    </section>
+
+    <section class="gallery-wrap">
+      <aside class="rail" aria-label="Catalog sections">
+        <div class="rail-title">SECTIONS</div>
+        <nav id="sectionRail"></nav>
+        <div class="rail-tip">Click a style for details.<br />Use ↑ ↓ to browse.</div>
+      </aside>
+
+      <section class="gallery" id="gallery" aria-live="polite"></section>
+    </section>
+  </main>
+
+  <div class="progress-track"><div id="progressBar"></div></div>
+
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+  <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Navbar details">
+    <div class="drawer-head">
+      <div>
+        <div class="drawer-kicker" id="drawerKicker"></div>
+        <h2 id="drawerTitle"></h2>
+      </div>
+      <button class="close-button" id="closeDrawer" aria-label="Close details">×</button>
+    </div>
+
+    <div class="live-stage" id="liveStage">
+      <div class="stage-glow"></div>
+      <div class="stage-navbar" id="stageNavbar"></div>
+    </div>
+
+    <div class="drawer-body">
+      <p class="drawer-description" id="drawerDescription"></p>
+      <div class="meta-grid" id="metaGrid"></div>
+
+      <div class="demo-row">
+        <button class="demo-button primary" id="demoSelect">Simulate active state</button>
+        <button class="demo-button" id="demoCollapse">Collapse / expand</button>
+      </div>
+
+      <div class="drawer-section">
+        <div class="section-label">Interaction notes</div>
+        <div class="notes" id="drawerNotes"></div>
+      </div>
+    </div>
+  </aside>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
